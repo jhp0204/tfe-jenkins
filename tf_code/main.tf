@@ -1,7 +1,15 @@
 provider "aws" {
   region = "${var.aws_region}"
 }
+terraform {
+  backend "remote" {
+    organization = "jhp0204"
 
+    workspaces {
+      name = "Integrate-Jenkins"
+    }
+  }
+}
 resource "aws_instance" "jenkins-demo" {
   count         = "${var.count}"
   ami           = "${var.ami_id}"
